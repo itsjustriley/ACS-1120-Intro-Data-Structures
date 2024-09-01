@@ -1,7 +1,5 @@
 import random
 
-# take words in command line, rearrange, print
-
 def rearrange_words(words):
     random.shuffle(words)
     return ' '.join(words)
