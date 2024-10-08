@@ -1,10 +1,11 @@
 """Main script, uses other modules to generate sentences."""
-from flask import Flask
+from flask import Flask, request, redirect
 import sample
 import rearrange
 import histogram
 import random
-
+import twitter 
+import markov
 
 app = Flask(__name__)
 
@@ -20,17 +21,15 @@ new_histogram = histogram.histogram(source)
 
 @app.route("/")
 def home():
-    number_of_words = random.randint(5, 10)
-    words = []
-    for i in range(number_of_words):
-        words.append(sample.weighted_random_word(new_histogram))
-
-    shuffled = rearrange.rearrange_words(words)
-    
-    shuffled = shuffled.capitalize()
-    sentence = shuffled + '.'
-
+    markov_chain = markov.MarkovChain(source)
+    sentence = markov_chain.generate_sentence()
     return sentence
+
+@app.route('/tweet', methods=['POST'])
+def tweet():
+    status = request.form['sentence']
+    twitter.tweet(status)
+    return redirect('/')
     
 
 
