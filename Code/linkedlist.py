@@ -93,13 +93,10 @@ class LinkedList:
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find item, if present return True otherwise False
+        node = self.head
         while node is not None:
-            if callable(matcher):
-                if matcher(node.data):
-                    return node.data
-            else:
-                if node.data == matcher:
-                    return node.data
+            if matcher(node.data):
+                return node.data
             node = node.next
         return None
 
