@@ -95,7 +95,7 @@ class LinkedList:
         # TODO: Loop through all nodes to find item, if present return True otherwise False
         node = self.head
         while node is not None:
-            if matcher(node.data):
+            if node.data == matcher:
                 return node.data
             node = node.next
         return None
