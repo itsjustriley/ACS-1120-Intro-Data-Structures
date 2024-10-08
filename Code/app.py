@@ -19,10 +19,14 @@ source = source_text()
 
 new_histogram = histogram.histogram(source)
 
+words = source.split()
+words = [word.strip() for word in words if word.strip()]
+words = [words[i] + words[i+1] if words[i+1] in [',', '.', '!', '?', ';', ':'] else words[i] for i in range(len(words)-1)]
+words = [word for word in words if word not in [',', '.', '!', '?', ';', ':']]
+
 @app.route("/")
 def home():
-    markov_chain = markov.MarkovChain(source)
-    sentence = markov_chain.generate_sentence()
+    sentence = markov.MarkovChain(words).generate_sentence()
     return render_template('index.html', sentence=sentence)
 
 @app.route('/tweet', methods=['POST'])
