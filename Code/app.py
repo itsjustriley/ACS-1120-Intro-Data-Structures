@@ -6,9 +6,10 @@ import histogram
 import random
 import twitter 
 import markov
+from config import Config
 
 app = Flask(__name__)
-
+app.config.from_object(Config)
 # TODO: Initialize your histogram, hash table, or markov chain here.
 # Any code placed here will run only once, when the server starts.
 def source_text():
@@ -39,6 +40,6 @@ def tweet():
 
 if __name__ == "__main__":
     """To run the Flask server, execute `python app.py` in your terminal.
-       To learn more about Flask's DEBUG mode, visit
-       https://flask.palletsprojects.com/en/2.0.x/server/#in-code"""
-    app.run(debug=True)
+    To learn more about Flask's DEBUG mode, visit
+    https://flask.palletsprojects.com/en/2.0.x/server/#in-code"""
+    app.run(debug=True, host='0.0.0.0', port=5000)
