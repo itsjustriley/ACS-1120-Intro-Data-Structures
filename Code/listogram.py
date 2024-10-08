@@ -24,11 +24,12 @@ class Listogram(list):
             if word in self:
                 index = self.index_of(word)
                 if index is not None:
-                    self[index] = (word, self[index][1] + 1)
+                    self[index][1] += 1
             else:
-                self.append((word, 1))
+                self.append([word, 1])
                 self.types += 1
             self.tokens += 1
+
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
         for i in range(len(self)):
