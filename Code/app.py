@@ -1,5 +1,5 @@
 """Main script, uses other modules to generate sentences."""
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, render_template
 import sample
 import rearrange
 import histogram
@@ -23,7 +23,7 @@ new_histogram = histogram.histogram(source)
 def home():
     markov_chain = markov.MarkovChain(source)
     sentence = markov_chain.generate_sentence()
-    return sentence
+    return render_template('index.html', sentence=sentence)
 
 @app.route('/tweet', methods=['POST'])
 def tweet():
